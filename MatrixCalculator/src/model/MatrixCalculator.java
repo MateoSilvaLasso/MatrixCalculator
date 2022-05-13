@@ -23,9 +23,22 @@ public class MatrixCalculator {
 		
 	}
 
-	public void addStudent(String name, int age, double average, String studentId){
+	public MatrixCalculator(Student[][] students2) {
+		int b = (int)(Math.random()*(100-1+1)+1);
+		char a = 65;
+		String as = ""+a;
+		System.out.println( a );
+		numericMatrices= new ArrayList<int[][]>() ;
+		stringMatrices= new ArrayList<String[][]>();
+		students= new Student[10][10];
+		this.students=students2;
+		r= new Random();
+		
+	}
+
+	public void addStudent(String name, int age, String studentId){
 		if(hasSpace()){
-			Student s= new Student(name, age, average, studentId);
+			Student s= new Student(name, age, studentId);
 			boolean p=true;
 			for(int i=0; i<students.length && p; i++){
 				for(int j=0; j<students[0].length && p; j++){
@@ -38,6 +51,55 @@ public class MatrixCalculator {
 		}
 	}
 
+	public void addNoteSubjectInStudent(String id,String []nameNote, double []valueNote, String nameSubject, int creditsSubject){
+
+		NoteSubject s= new NoteSubject(nameSubject, creditsSubject, nameNote, valueNote);
+		boolean p=true;
+		for(int i=0; i<students.length && p; i++){
+			for(int j=0; j<students[0].length && p; j++){
+				if(students[i][j].getStudentId().equalsIgnoreCase(id)){
+					students[i][j].addNotes(s);
+					p=false;
+				}
+			}
+		}
+
+
+	}
+
+	public ArrayList<String> printNotes(String id){
+		ArrayList<String> out=new ArrayList<>();
+		boolean p=true;
+		String real="";
+		for(int i=0; i<students.length && p;i++){
+			for(int j=0; j<students[0].length && p; j++){
+				if(students[i][j]!=null && students[i][j].getStudentId().equals(id)){
+					out=students[i][j].notesTable();
+				}
+			}
+		}
+
+		
+
+		return out;
+	}
+
+	public double studentAverage(String id){
+		boolean p=true;
+		double real=0;
+		for(int i=0; i<students.length && p;i++){
+			for(int j=0; j<students[0].length && p; j++){
+				if(students[i][j]!=null && students[i][j].getStudentId().equals(id)){
+					real=students[i][j].getAverage();
+					p=false;
+				}
+			}
+		}
+
+		
+
+		return real;
+	}
 	public boolean hasSpace(){
 		boolean p=false;
 		for(int i=0; i<students.length && p==false; i++){
@@ -50,9 +112,7 @@ public class MatrixCalculator {
 		return p;
 	}
 
-	public void addNotes(){
-		
-	}
+
 
 	public String printNames(){
 		String out="";
@@ -172,6 +232,19 @@ public class MatrixCalculator {
 		}
 
 		return table;
+	}
+
+	public String [][] getStudents(){
+		String [][] s= new String[10][10];
+
+		for(int i=0; i<students.length; i++){
+			for(int j=0; j<students[0].length; j++){
+				if(students[i][j]!=null){
+					s[i][j]=students[i][j].getStudentId();
+				}
+			}
+		}
+		return s;
 	}
 
 }
