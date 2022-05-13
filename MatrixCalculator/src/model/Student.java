@@ -68,7 +68,7 @@ public class Student {
                     int k=0;
                     String [] s= notes[i][j].getNameNote();
                     double [] p= notes[i][j].getValueNote();
-                    c="         "+notes[i][j].getNameSubject()+"\n"+s[k]+"|"+p[k]+"\n"+s[k+1]+"|"+p[k+1]+"\n"+s[k+2]+"|"+p[k+2]+"\n";
+                    c="         "+notes[i][j].getNameSubject()+"\n"+s[k]+"|"+p[k]+"\n"+s[k+1]+"|"+p[k+1]+"\n"+s[k+2]+"|"+p[k+2]+"\n"+"\n";
                     out.add(c);
 
                 }
